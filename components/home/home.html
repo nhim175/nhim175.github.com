@@ -1,1 +1,35 @@
-<p>{{ text }}</p>
+<div class="offscreen-nav">
+  <ul class="nav nav-pills nav-stacked">
+    <li><a href="#!/">Home</a></li>
+    <li ng-repeat="c in category.models"><a href="#!/category/{{c.id}}">{{c.get('name')}}</a></li>
+  </ul>
+</div>
+<div class="content-pane" ng-class="{toggle: offScreen}">
+  <header class="header">
+    <span class="offscreen-toggle visible-xs" ng-click="toggleOffScreen()">
+      <a><i class="fa fa-bars"></i></a>
+    </span>
+
+    <div class="col-md-12 profile">
+      <img class="profile-photo" src="assets/img/profile-photo.jpg" />
+      <h1>Thinh Pham (ティン)</h1>
+      <div class="social-links">
+        <a href="http://facebook.com/nhim175" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a href="http://github.com/nhim175" target="_blank"><i class="fa fa-github"></i></a>
+        <a href="http://twitter.com/ThinhPham175" target="_blank"><i class="fa fa-twitter"></i></a>
+      </div>
+      <!-- Menu -->
+      <div class="navbar navbar-default hidden-xs">
+        <div class="container">
+          <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+              <li><a href="#!/">Home</a></li>
+              <li ng-repeat="c in category.models"><a href="#!/category/{{c.id}}">{{c.get('name')}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div ui-view></div>
+</div>

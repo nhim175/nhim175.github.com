@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-4 card" ng-repeat="p in post.models">
+      <div class="card-cover" style="background: {{getCategoryColorById(p.get('category').id)}}">
+        <p>{{getCategoryNameById(p.get('category').id)}}</p>
+      </div>
+      <div class="card-body">
+        <h2><a href="#!/post/{{p.id}}">{{p.get('title')}}</a></h2>
+        <p>{{p.get('content')}}</p>
+      </div>
+      <div class="card-footer">
+        <a href="#!/post/{{p.id}}" class="more-link">More</a>
+      </div>
+    </div>
+  </div>
+</div>
