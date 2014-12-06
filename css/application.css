@@ -27,6 +27,7 @@ textarea.theme-inverse {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; }
   .content-pane.toggle {
+    -webkit-transform: translateX(-60%);
     transform: translateX(-60%); }
 
 .offscreen-nav {
