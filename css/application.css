@@ -128,7 +128,8 @@ header.header .navbar-nav {
     border-bottom: 1px solid #717F8C; }
   .card-body p {
     margin-bottom: 0;
-    overflow: hidden; }
+    overflow: hidden;
+    font-family: 'Old Standard TT', sans-serif; }
 
 .card-footer {
   position: absolute;
@@ -148,6 +149,8 @@ header.header .navbar-nav {
   font-size: 0.9em; }
 .post .post-content {
   font-family: 'Old Standard TT', sans-serif; }
+.post .post-comment {
+  margin-top: 21px; }
 
 .test {
   font-size: 10px; }
