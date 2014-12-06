@@ -157,13 +157,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 app.controller('HomeController', [
-  '$scope', '$rootScope', 'Category', 'categories', function($scope, $rootScope, Category, categories) {
+  '$scope', '$rootScope', '$document', '$timeout', 'Category', 'categories', function($scope, $rootScope, $document, $timeout, Category, categories) {
     $scope.category = categories;
     $scope.offScreen = false;
     $rootScope.$broadcast('category::fetched', categories);
-    return $scope.toggleOffScreen = function() {
-      return $scope.offScreen = !$scope.offScreen;
+    $scope.toggleOffScreen = function() {
+      $scope.offScreen = !$scope.offScreen;
+      if ($scope.offScreen === true) {
+        $timeout(function() {
+          return $document.one('click', function(event) {
+            $scope.offScreen = false;
+            return $scope.$apply();
+          });
+        }, 0);
+      }
+      return false;
     };
+    return FB.XFBML.parse();
   }
 ]);
 

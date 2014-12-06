@@ -2,6 +2,10 @@
   <ul class="nav nav-pills nav-stacked">
     <li><a href="#!/">Home</a></li>
     <li ng-repeat="c in category.models"><a href="#!/category/{{c.id}}">{{c.get('name')}}</a></li>
+    <li class="search-bar">
+      <a href="#!/search/{{searchText}}"><i class="fa fa-search"></i></a>
+      <input type="text" ng-model="searchText" class="form-control" />
+    </li>
   </ul>
 </div>
 <div class="content-pane" ng-class="{toggle: offScreen}">
@@ -25,6 +29,7 @@
             <ul class="nav navbar-nav">
               <li><a href="#!/">Home</a></li>
               <li ng-repeat="c in category.models"><a href="#!/category/{{c.id}}">{{c.get('name')}}</a></li>
+              <li><a ng-click="showSearchBox()"><i class="fa fa-search"></i></a></li>
             </ul>
           </div>
         </div>
@@ -32,4 +37,7 @@
     </div>
   </header>
   <div ui-view></div>
+  <div class="container">
+    <div class="fb-like-box" data-href="https://www.facebook.com/ThietKeWeb999" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false" data-width="600px"></div>
+  </div>
 </div>
