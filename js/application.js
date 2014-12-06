@@ -162,13 +162,18 @@ app.controller('HomeController', [
     $scope.offScreen = false;
     $rootScope.$broadcast('category::fetched', categories);
     $scope.toggleOffScreen = function() {
+      var handle_document_click;
       $scope.offScreen = !$scope.offScreen;
       if ($scope.offScreen === true) {
+        handle_document_click = function(event) {
+          if (event.target instanceof HTMLInputElement) {
+            return $document.one('click', handle_document_click);
+          }
+          $scope.offScreen = false;
+          return $scope.$apply();
+        };
         $timeout(function() {
-          return $document.one('click', function(event) {
-            $scope.offScreen = false;
-            return $scope.$apply();
-          });
+          return $document.one('click', handle_document_click);
         }, 0);
       }
       return false;
