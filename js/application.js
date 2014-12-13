@@ -95,6 +95,19 @@ app.factory('Post', function() {
   };
 });
 
+app.factory('Setting', function() {
+  var title;
+  title = "Thinh Pham's Blog";
+  return {
+    blogTitle: function() {
+      return title;
+    },
+    setHeadTitle: function(_title) {
+      return angular.element('title').html(title + ' - ' + _title);
+    }
+  };
+});
+
 app.factory('User', function() {
   return Parse.User;
 });
@@ -126,15 +139,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'components/post/post.grid.html',
     controller: 'CategoryController',
     resolve: {
-      posts: function($stateParams, Post, Category) {
-        return Post.Query.equalTo("category", Category.find($stateParams.id)).find();
+      posts: function($stateParams, Post, Category, Setting) {
+        var category;
+        category = Category.find($stateParams.id);
+        Setting.setHeadTitle(category.get('name'));
+        return Post.Query.equalTo("category", category).find();
       }
     }
   });
 });
 
 app.controller('CategoryController', [
-  '$scope', '$state', 'Post', 'Category', 'posts', 'categories', function($scope, $state, Post, Category, posts, categories) {
+  '$scope', '$state', 'Post', 'Category', 'Setting', 'posts', 'categories', function($scope, $state, Post, Category, Setting, posts, categories) {
     $scope.post = {
       models: posts
     };
@@ -162,10 +178,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 app.controller('HomeController', [
-  '$scope', '$rootScope', '$document', '$timeout', 'Category', 'categories', function($scope, $rootScope, $document, $timeout, Category, categories) {
+  '$scope', '$rootScope', '$document', '$timeout', 'Category', 'Setting', 'categories', function($scope, $rootScope, $document, $timeout, Category, Setting, categories) {
     $scope.category = categories;
     $scope.offScreen = false;
     $rootScope.$broadcast('category::fetched', categories);
+    angular.element('title').html(Setting.blogTitle());
     $scope.toggleOffScreen = function() {
       var handle_document_click;
       $scope.offScreen = !$scope.offScreen;
@@ -266,13 +283,14 @@ app.controller('PostController', [
 ]);
 
 app.controller('SinglePostController', [
-  '$scope', '$stateParams', '$window', '$timeout', 'Post', 'Category', 'post', function($scope, $stateParams, $window, $timeout, Post, Category, post) {
+  '$scope', '$stateParams', '$window', '$timeout', 'Post', 'Category', 'Setting', 'post', function($scope, $stateParams, $window, $timeout, Post, Category, Setting, post) {
     var $disqusResetTimeout;
     $scope.post = post;
     $scope.category = Category.find(post.get('category').id);
     $scope.postContent = post.get('content').replace(/\[md\]([\s\S]*?)\[\/md\]/g, function(str, m1) {
       return markdown.toHTML(m1);
     });
+    Setting.setHeadTitle(post.get('title'));
     $disqusResetTimeout = null;
     return $window.onresize = function() {
       if ($disqusResetTimeout) {
