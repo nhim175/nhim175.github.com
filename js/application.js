@@ -8,7 +8,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $disq
   return $disqusProvider.setShortname('nhim175');
 });
 
-app.directive('markdown', function() {
+app.directive('markdown', function($compile) {
   var config;
   return config = {
     restrict: 'E',
@@ -16,7 +16,12 @@ app.directive('markdown', function() {
       content: '='
     },
     link: function(scope, elem, attrs) {
-      return elem.html(markdown.toHTML(scope.content));
+      var content;
+      content = scope.content.replace(/\[md\]([\s\S]*?)\[\/md\]/g, function(str, m1) {
+        return markdown.toHTML(m1);
+      });
+      elem.html(content);
+      return $compile(elem.contents())(scope);
     }
   };
 });
@@ -210,6 +215,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/posts/new',
     templateUrl: 'components/post/post.new.html',
     controller: 'PostController'
+  }).state('admin.edit-post', {
+    url: '/post/:id',
+    templateUrl: 'components/post/post.edit.html',
+    controller: 'EditPostController',
+    resolve: {
+      post: function($stateParams, Post) {
+        return Post.find($stateParams.id);
+      }
+    }
   }).state('index.home', {
     url: '/blog',
     templateUrl: 'components/post/post.grid.html',
@@ -256,6 +270,9 @@ app.controller('SinglePostController', [
     var $disqusResetTimeout;
     $scope.post = post;
     $scope.category = Category.find(post.get('category').id);
+    $scope.postContent = post.get('content').replace(/\[md\]([\s\S]*?)\[\/md\]/g, function(str, m1) {
+      return markdown.toHTML(m1);
+    });
     $disqusResetTimeout = null;
     return $window.onresize = function() {
       if ($disqusResetTimeout) {
@@ -267,6 +284,20 @@ app.controller('SinglePostController', [
           reload: true
         });
       }, 1000);
+    };
+  }
+]);
+
+app.controller('EditPostController', [
+  '$scope', '$state', 'Post', 'post', function($scope, $state, Post, post) {
+    $scope.title = post.get('title');
+    $scope.content = post.get('content');
+    return $scope.save = function() {
+      post.set('title', $scope.title);
+      post.set('content', $scope.content);
+      return post.save().then(function(result) {
+        return $state.go('admin.posts');
+      });
     };
   }
 ]);

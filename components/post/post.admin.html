@@ -23,7 +23,7 @@
             <td>{{p.get('content') | limitTo: 100}}</td>
             <td class="text-center">{{getCategoryNameById(p.get('category').id)}}</td>
             <td>
-              <a href="#!/posts/edit/{{p.id}}" class="btn btn-sm btn-primary">Edit</a>
+              <a href="#!/admin/post/{{p.id}}" class="btn btn-sm btn-primary">Edit</a>
               <a href="#!/posts/delete/{{p.id}}" class="btn btn-sm btn-danger">Delete</a>
             </td>
           </tr>

@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="bower_components/ui-router/release/angular-ui-router.js"></script>
+  <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 
   <!-- Bower components -->
   <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
@@ -37,7 +39,7 @@
   <script type="text/javascript">
   Parse.initialize("iGui6gXyhiGbmpwPbnx9XPkdauR8j3CT359F1EWZ", "B0ynKbLkdNu69LkZjSXH5hPMQ8TKtiRTHw3vSMNu");
   // Entry point
-  var app = angular.module('app', ['ui.router', 'ngTouch', 'ngDisqus']);
+  var app = angular.module('app', ['ui.router', 'ngTouch', 'ngDisqus', 'ngSanitize']);
   </script>
   <script type="text/javascript" src="js/application.js"></script>
 </body>

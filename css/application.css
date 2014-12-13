@@ -113,8 +113,6 @@ header.header .navbar-nav {
   background: #4e5d6c;
   padding: 20px 20px 50px;
   height: 300px;
-  display: flex;
-  flex-direction: column;
   position: relative;
   overflow: hidden; }
   .card-body:after {
