@@ -2,6 +2,11 @@ body {
   font-family: 'Montserrat', sans-serif;
   min-height: 100%; }
 
+code {
+  white-space: pre;
+  display: block;
+}
+
 #fb-root {
   display: none; }
 
