@@ -1,0 +1,47 @@
+/*
+$brand-bg: #F7F6F1;
+$dark-grey: #787878;
+$grey: #9B9B9B;
+*/
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.intro {
+  background: url(../images/logo-with-text.png) no-repeat center calc(50% - 50px) #F7F6F1;
+  background-size: 500px;
+  height: 600px;
+  font-weight: bold;
+  color: #787878;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro .intro-title {
+  font-weight: 600;
+  margin-top: 100px;
+}
+
+.section {
+  padding: 40px;
+}
+
+.section-brand-bg {
+  background-color: #F7F6F1;
+}
+
+.section .section-title {
+  font-size: 42px;
+  font-weight: 600;
+  max-width: 768px;
+  margin: 0 auto 20px;
+}
+
+.section .section-description {
+  font-size: 28px;
+  max-width: 768px;
+  margin: auto;
+  color: #787878;
+}
